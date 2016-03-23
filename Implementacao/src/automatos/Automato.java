@@ -18,42 +18,27 @@ public abstract class Automato {
 		instanciarEstruturaEspecifica();
 		instanciarEntrada();
 		instanciarTransicoes();
-		adicionarTransicao(transicoes);
 		instanciarEstadosFinais(estadosFinais);
 		instanciarEstadoCorrente(estadoInicial);
-		instanciarServicos();
 	}
 	
 	// Interface de instancializacao
 	
 	protected abstract void instanciarEstruturaEspecifica(); // Para Automatos que necessitem de estruturas especificas
 	protected abstract void instanciarEntrada(); // Instancia o tipo de fita a ser utilizada
-	protected abstract void adicionarTransicao(Map<Key, String> transicoes); // Adicionas as transicoes que serao utilizadas
+	protected abstract void adicionarTransicoes(Map<Key, String> transicoes); // Adicionas as transicoes que serao utilizadas
 	
 	protected void instanciarTransicoes() {
 		transicoes = new HashMap<Key, String>();
 	}
 	
 	private void instanciarEstadosFinais(List<String> estadosFinais) {
-		this.estadosFinais.addAll(estadosFinais);
+		this.estadosFinais = estadosFinais;
 	}
 	
 	private void instanciarEstadoCorrente(String estadoInicial) {
 		this.estadoCorrente = estadoInicial;
 	}
-	
-	private void instanciarServicos() {
-		instanciarConsulta();
-		instanciarMovimentacao();
-	}
-	
-	// Interface de servicos
-	
-	private void instanciarConsulta() throws UnsupportedOperationException {
-		throw new UnsupportedOperationException();
-	}
-	
-	protected abstract void instanciarMovimentacao();
 	
 	// Interface caracteristica
 	
@@ -73,9 +58,13 @@ public abstract class Automato {
 		return estadosFinais.contains(estadoCorrente);
 	}
 	
+	public boolean estaEmFinalDeCadeia() {
+		return entrada.ler() == '>';
+	}
+	
 	// Interface de movimento
 	
-	public abstract void moverAutomato();
+	public abstract void moverAutomato(String proximoEstado);
 	
 	// Interface de clonagem
 	

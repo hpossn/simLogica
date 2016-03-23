@@ -1,8 +1,10 @@
 package reconhecedores;
 
 import java.util.List;
+import java.util.Map;
 
 import automatos.Automato;
+import servicos.Key;
 
 public abstract class Reconhecedor {
 	
@@ -13,13 +15,13 @@ public abstract class Reconhecedor {
 	
 	// Interface de instanciacao
 	
-	public Reconhecedor(String estadoInicial, List<String> estadosFinais) {
+	public Reconhecedor(String estadoInicial, List<String> estadosFinais, Map<Key, String> transicoes) {
 		instanciarEstruturasEspecificas();
-		instanciarAutomato(estadoInicial, estadosFinais);
+		instanciarAutomato(estadoInicial, estadosFinais, transicoes);
 	}
 
 	protected abstract void instanciarEstruturasEspecificas();
-	protected abstract void instanciarAutomato(String estadoInicial, List<String> estadosFinais);
+	protected abstract void instanciarAutomato(String estadoInicial, List<String> estadosFinais, Map<Key, String> transicoes);
 
 	// Interface caracteristica
 	
@@ -28,7 +30,7 @@ public abstract class Reconhecedor {
 	}
 	
 	public void analisar() {
-		subEspacoAutomato.addAll(automato.executar());
+		subEspacoAutomato = automato.executar();
 	}
 	
 	public abstract boolean reconheceu();

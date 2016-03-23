@@ -19,7 +19,7 @@ public class Key {
 		
 		Key key = (Key) o;
 		
-		return this.x == key.x && this.y == key.y;
+		return this.x.equals(key.x) && this.y.equals(key.y);
 	}
 	
 	@Override
