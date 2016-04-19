@@ -5,21 +5,31 @@ import java.util.List;
 import java.util.Map;
 
 import fitas.FitaLimitada;
-import servicos.Key;
+import pilhas.Pilha;
 import servicos.TuplaString;
+import servicos.Key;
 
-public class AutomatoFinitoDeterministico extends Automato {
-
-	public AutomatoFinitoDeterministico(Map<Key, TuplaString> transicoes, List<String> estadosFinais,
-			String estadoInicial) {
+public class AutomatoPilhaDeterministico extends Automato{
+	
+	public AutomatoPilhaDeterministico(Map<Key, TuplaString> transicoes, List<String> estadosFinais, String estadoInicial) {
 		super(transicoes, estadosFinais, estadoInicial);
 		
 		adicionarTransicoes(transicoes);
-		
+	}
+
+	protected Pilha pilha;
+
+
+	@Override
+	public String configuracao() {
+		return String.format("(%s, %s)", super.configuracao(), pilha.configuracao());
 	}
 
 	@Override
-	protected void instanciarEstruturaEspecifica() {}
+	protected void instanciarEstruturaEspecifica() {
+		pilha = new Pilha();
+		
+	}
 
 	@Override
 	protected void instanciarEntrada() {
@@ -29,6 +39,12 @@ public class AutomatoFinitoDeterministico extends Automato {
 	@Override
 	protected void adicionarTransicoes(Map<Key, TuplaString> transicoes) {
 		this.transicoes.putAll(transicoes);
+		
+	}
+	
+	@Override
+	public boolean isPilhaVazia() {
+		return pilha.isVazia();
 	}
 
 	@Override
@@ -36,12 +52,16 @@ public class AutomatoFinitoDeterministico extends Automato {
 		boolean finalizaLeitura = false;
 		
 		while(!finalizaLeitura) {
-			TuplaString tupla = transicoes.get(new Key(estadoCorrente, String.valueOf(entrada.ler()), ""));
+			TuplaString tupla = transicoes.get(new Key(estadoCorrente, String.valueOf(entrada.ler()), pilha.topo()));
+			
+			System.out.println(configuracao());
 			
 			if(tupla == null) {
 					finalizaLeitura = true;
 			} else {
 				estadoCorrente = tupla.getEstado();
+				pilha.pop();
+				pilha.push(tupla.getPilha());
 				entrada.avancar();
 			}
 			
@@ -57,12 +77,6 @@ public class AutomatoFinitoDeterministico extends Automato {
 	public void moverAutomato(String proximoEstado) {
 		estadoCorrente = proximoEstado;
 		entrada.avancar();
-
-	}
-	
-	@Override
-	public boolean isPilhaVazia() {
-		return true;
 	}
 
 }

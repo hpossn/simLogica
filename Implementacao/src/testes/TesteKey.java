@@ -8,8 +8,8 @@ public class TesteKey {
 
 	@Test
 	public void test() {
-		Key key1 = new Key("q0", "1");
-		Key key2 = new Key("q0", "1");
+		Key key1 = new Key("q0", "1", "");
+		Key key2 = new Key("q0", "1", "");
 		
 		System.out.println("key1: " + key1.hashCode());
 		System.out.println("key1: " + key2.hashCode());

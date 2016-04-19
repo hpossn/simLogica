@@ -4,12 +4,14 @@ import java.util.Objects;
 
 public class Key {
 	
-	private final String x;
-	private final String y;
+	protected final String x;
+	protected final String y;
+	protected final String z;
 	
-	public Key(String x, String y) {
+	public Key(String x, String y, String z) {
 		this.x = x;
 		this.y = y;
+		this.z = z;
 	}
 	
 	@Override
@@ -19,12 +21,12 @@ public class Key {
 		
 		Key key = (Key) o;
 		
-		return this.x.equals(key.x) && this.y.equals(key.y);
+		return this.x.equals(key.x) && this.y.equals(key.y) && this.z.equals(key.z);
 	}
 	
 	@Override
 	public int hashCode() {
-		return Objects.hash(x, y);
+		return Objects.hash(x, y, z);
 	}
 
 }

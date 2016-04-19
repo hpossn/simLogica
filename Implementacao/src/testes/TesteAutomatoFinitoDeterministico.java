@@ -9,26 +9,27 @@ import org.junit.Before;
 import org.junit.Test;
 
 import servicos.Key;
+import servicos.TuplaString;
 import automatos.Automato;
 import automatos.AutomatoFinitoDeterministico;
 
 public class TesteAutomatoFinitoDeterministico {
 	
 	Automato automatoFD;
-	Map<Key, String> transicoes;
+	Map<Key, TuplaString> transicoes;
 	List<String> estadosFinais;
 	String estadoInicial;
 	
 	@Before
 	public void iniciaAutomato() {
-		transicoes = new HashMap<Key, String>();
+		transicoes = new HashMap<Key, TuplaString>();
 		
-		transicoes.put(new Key("q0", "0"), "q0");
-		transicoes.put(new Key("q0", "1"), "q1");
-		transicoes.put(new Key("q1", "0"), "q1");
-		transicoes.put(new Key("q1", "1"), "q2");
-		transicoes.put(new Key("q2", "0"), "q2");
-		transicoes.put(new Key("q2", "1"), "q2");
+		transicoes.put(new Key("q0", "0", ""), new TuplaString("q0", new ArrayList<String>()));
+		transicoes.put(new Key("q0", "1", ""), new TuplaString("q1", new ArrayList<String>()));
+		transicoes.put(new Key("q1", "0", ""), new TuplaString("q1", new ArrayList<String>()));
+		transicoes.put(new Key("q1", "1", ""), new TuplaString("q2", new ArrayList<String>()));
+		transicoes.put(new Key("q2", "0", ""), new TuplaString("q2", new ArrayList<String>()));
+		transicoes.put(new Key("q2", "1", ""), new TuplaString("q2", new ArrayList<String>()));
 		
 		estadosFinais = new ArrayList<String>();
 		
@@ -40,7 +41,7 @@ public class TesteAutomatoFinitoDeterministico {
 
 	@Test
 	public void testExecutarCadeia() {
-		automatoFD.iniciar("00010001");
+		automatoFD.iniciar("10110000");
 		List<Automato> resultadoAutomato= automatoFD.executar();
 		
 		boolean reconheceu = false;

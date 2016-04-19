@@ -5,6 +5,7 @@ import java.util.Map;
 
 import automatos.Automato;
 import servicos.Key;
+import servicos.TuplaString;
 
 public abstract class Reconhecedor {
 	
@@ -15,13 +16,13 @@ public abstract class Reconhecedor {
 	
 	// Interface de instanciacao
 	
-	public Reconhecedor(String estadoInicial, List<String> estadosFinais, Map<Key, String> transicoes) {
+	public Reconhecedor(String estadoInicial, List<String> estadosFinais, Map<Key, TuplaString> transicoes) {
 		instanciarEstruturasEspecificas();
 		instanciarAutomato(estadoInicial, estadosFinais, transicoes);
 	}
 
 	protected abstract void instanciarEstruturasEspecificas();
-	protected abstract void instanciarAutomato(String estadoInicial, List<String> estadosFinais, Map<Key, String> transicoes);
+	protected abstract void instanciarAutomato(String estadoInicial, List<String> estadosFinais, Map<Key, TuplaString> transicoes);
 
 	// Interface caracteristica
 	

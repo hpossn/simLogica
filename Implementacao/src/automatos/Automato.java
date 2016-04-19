@@ -6,15 +6,16 @@ import java.util.Map;
 
 import fitas.Fita;
 import servicos.Key;
+import servicos.TuplaString;
 
 public abstract class Automato {
 	
-	protected Map<Key, String> transicoes;
+	protected Map<Key, TuplaString> transicoes;
 	protected List<String> estadosFinais;
 	protected String estadoCorrente;
 	protected Fita entrada;
 	
-	public Automato(Map<Key, String> transicoes, List<String> estadosFinais, String estadoInicial) {
+	public Automato(Map<Key, TuplaString> transicoes, List<String> estadosFinais, String estadoInicial) {
 		instanciarEstruturaEspecifica();
 		instanciarEntrada();
 		instanciarTransicoes();
@@ -26,10 +27,10 @@ public abstract class Automato {
 	
 	protected abstract void instanciarEstruturaEspecifica(); // Para Automatos que necessitem de estruturas especificas
 	protected abstract void instanciarEntrada(); // Instancia o tipo de fita a ser utilizada
-	protected abstract void adicionarTransicoes(Map<Key, String> transicoes); // Adicionas as transicoes que serao utilizadas
+	protected abstract void adicionarTransicoes(Map<Key, TuplaString> transicoes); // Adicionas as transicoes que serao utilizadas
 	
 	protected void instanciarTransicoes() {
-		transicoes = new HashMap<Key, String>();
+		transicoes = new HashMap<Key, TuplaString>();
 	}
 	
 	private void instanciarEstadosFinais(List<String> estadosFinais) {
@@ -71,6 +72,8 @@ public abstract class Automato {
 	public void clonar() throws UnsupportedOperationException {
 		throw new UnsupportedOperationException();
 	}
-		
+	
+	
+	public abstract boolean isPilhaVazia();
 
 }

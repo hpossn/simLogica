@@ -6,10 +6,11 @@ import java.util.Map;
 import automatos.Automato;
 import automatos.AutomatoFinitoDeterministico;
 import servicos.Key;
+import servicos.TuplaString;
 
 public class ReconhecedorFinitoDeterministico extends Reconhecedor {
 
-	public ReconhecedorFinitoDeterministico(String estadoInicial, List<String> estadosFinais, Map<Key, String> transicoes) {
+	public ReconhecedorFinitoDeterministico(String estadoInicial, List<String> estadosFinais, Map<Key, TuplaString> transicoes) {
 		super(estadoInicial, estadosFinais, transicoes);
 	}
 
@@ -17,7 +18,7 @@ public class ReconhecedorFinitoDeterministico extends Reconhecedor {
 	protected void instanciarEstruturasEspecificas() {}
 
 	@Override
-	protected void instanciarAutomato(String estadoInicial, List<String> estadosFinais, Map<Key, String> transicoes) {
+	protected void instanciarAutomato(String estadoInicial, List<String> estadosFinais, Map<Key, TuplaString> transicoes) {
 		automato = new AutomatoFinitoDeterministico(transicoes, estadosFinais, estadoInicial);
 	}
 
