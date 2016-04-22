@@ -32,8 +32,10 @@ public abstract class Fita {
 	
 	// Interface de clonagem
 	
-	public final String clonar() throws UnsupportedOperationException {
+	public final Character clonar() throws UnsupportedOperationException {
 		throw new UnsupportedOperationException();
 	}
+	
+	public abstract void escrever(char valor);
 	
 }

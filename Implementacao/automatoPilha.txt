@@ -1,0 +1,10 @@
+q0,q1
+a,b,c,>, Z0, C
+q0
+q1
+q0,a,Z0,q0,Z0,C,C
+q0,a,C,q0,C,C,C
+q0,b,Z0,q1,Z0
+q0,b,C,q1,C
+q1,c,C,q1
+q1,,Z0,q1

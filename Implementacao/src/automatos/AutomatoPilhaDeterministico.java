@@ -11,8 +11,8 @@ import servicos.Key;
 
 public class AutomatoPilhaDeterministico extends Automato{
 	
-	public AutomatoPilhaDeterministico(Map<Key, TuplaString> transicoes, List<String> estadosFinais, String estadoInicial) {
-		super(transicoes, estadosFinais, estadoInicial);
+	public AutomatoPilhaDeterministico(Map<Key, TuplaString> transicoes, List<String> estadosFinais, String estadoInicial, boolean ativarTrace) {
+		super(transicoes, estadosFinais, estadoInicial, ativarTrace);
 		
 		adicionarTransicoes(transicoes);
 	}
@@ -54,10 +54,19 @@ public class AutomatoPilhaDeterministico extends Automato{
 		while(!finalizaLeitura) {
 			TuplaString tupla = transicoes.get(new Key(estadoCorrente, String.valueOf(entrada.ler()), pilha.topo()));
 			
-			System.out.println(configuracao());
+			if(ativarTrace)
+				System.out.println(configuracao());
 			
 			if(tupla == null) {
+				TuplaString tupla2 = transicoes.get(new Key(estadoCorrente, "", pilha.topo()));
+				if(tupla2 == null)
 					finalizaLeitura = true;
+				else {
+					estadoCorrente = tupla2.getEstado();
+					pilha.pop();
+					pilha.push(tupla2.getPilha());
+				}
+				
 			} else {
 				estadoCorrente = tupla.getEstado();
 				pilha.pop();

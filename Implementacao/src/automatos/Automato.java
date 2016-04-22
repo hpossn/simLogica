@@ -15,12 +15,19 @@ public abstract class Automato {
 	protected String estadoCorrente;
 	protected Fita entrada;
 	
-	public Automato(Map<Key, TuplaString> transicoes, List<String> estadosFinais, String estadoInicial) {
+	protected boolean ativarTrace;
+	
+	public Automato(Map<Key, TuplaString> transicoes, List<String> estadosFinais, String estadoInicial, boolean ativarTrace) {
 		instanciarEstruturaEspecifica();
 		instanciarEntrada();
 		instanciarTransicoes();
 		instanciarEstadosFinais(estadosFinais);
 		instanciarEstadoCorrente(estadoInicial);
+		this.ativarTrace = ativarTrace;
+	}
+	
+	public boolean extrapolou() {
+		return false;
 	}
 	
 	// Interface de instancializacao

@@ -2,11 +2,13 @@ package fitas;
 
 import java.util.ArrayList;
 
-public class FitaLimitada extends Fita {
+public class FitaIlimitada extends Fita {
+	
+	private int tamMaxB = 50; // teoricamente seria ilimitado, mas para a simulacao, estabelece-se um limite
 	
 	// Interface de instancializacao
 	
-	public FitaLimitada() {
+	public FitaIlimitada() {
 		super();
 	}
 	
@@ -23,7 +25,8 @@ public class FitaLimitada extends Fita {
 		for(char c : cadeia.toCharArray())
 			celulas.add(c);
 		
-		celulas.add('>');
+		celulas.add('B');
+		tamMaxB--;
 		
 		cursor = 1;
 	}
@@ -34,15 +37,25 @@ public class FitaLimitada extends Fita {
 	}
 	
 	@Override
-	public void avancar() {
-		int n = celulas.size() - 2;
-		cursor += (cursor >= 0) & (cursor <= n) ? 1 : 0; // Cursor avanca 1 caso seja maior ou igual a zero e menor ou igual a n
+	public void avancar() throws IndexOutOfBoundsException {
+		if(cursor == celulas.size() - 1) {
+			celulas.add('B');
+			tamMaxB--;
+		}
+		
+		if(tamMaxB == 0) throw new IndexOutOfBoundsException("Limite da fita");
+		cursor++;
 	}
 	
 	@Override
 	public void recuar() {
 		int n = celulas.size() - 1;
 		cursor -= (cursor >= 1) & (cursor <= n) ? 1 : 0; // Cursor recua 1 caso seja maior do que 0 e menor ou igual a n
+	}
+	
+	public void escrever(char c) {
+		celulas.remove(cursor);
+		celulas.add(cursor, c);
 	}
 				
 	// Interface de consulta
@@ -83,8 +96,5 @@ public class FitaLimitada extends Fita {
 		
 		return cadeia;
 	}
-
-	@Override
-	public void escrever(char c) {}
 
 }

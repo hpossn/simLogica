@@ -19,7 +19,7 @@ public class ReconhecedorFinitoDeterministico extends Reconhecedor {
 
 	@Override
 	protected void instanciarAutomato(String estadoInicial, List<String> estadosFinais, Map<Key, TuplaString> transicoes) {
-		automato = new AutomatoFinitoDeterministico(transicoes, estadosFinais, estadoInicial);
+		automato = new AutomatoFinitoDeterministico(transicoes, estadosFinais, estadoInicial, true);
 	}
 
 	@Override

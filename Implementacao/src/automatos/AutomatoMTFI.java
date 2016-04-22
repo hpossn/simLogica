@@ -4,13 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import fitas.FitaLimitada;
+import fitas.FitaIlimitada;
 import servicos.Key;
 import servicos.TuplaString;
 
-public class AutomatoFinitoDeterministico extends Automato {
+public class AutomatoMTFI extends Automato {
+	
+	private boolean rejeita = false;
 
-	public AutomatoFinitoDeterministico(Map<Key, TuplaString> transicoes, List<String> estadosFinais,
+	public AutomatoMTFI(Map<Key, TuplaString> transicoes, List<String> estadosFinais,
 			String estadoInicial, boolean ativarTrace) {
 		super(transicoes, estadosFinais, estadoInicial, ativarTrace);
 		
@@ -23,7 +25,7 @@ public class AutomatoFinitoDeterministico extends Automato {
 
 	@Override
 	protected void instanciarEntrada() {
-		entrada = new FitaLimitada();
+		entrada = new FitaIlimitada();
 	}
 
 	@Override
@@ -41,11 +43,27 @@ public class AutomatoFinitoDeterministico extends Automato {
 			if(ativarTrace)
 				System.out.println(configuracao());
 			
-			if(tupla == null) {
-					finalizaLeitura = true;
+			
+			if(estaEmEstadoFinal()) {
+				finalizaLeitura = true;
+			} else if(tupla == null) {
+				finalizaLeitura = true;
+				rejeita = true;
 			} else {
 				estadoCorrente = tupla.getEstado();
-				entrada.avancar();
+				entrada.escrever(tupla.getPilha().get(0).charAt(0));
+				
+				if(tupla.getPilha().get(1).charAt(0) == 'D') {
+					try {
+						entrada.avancar();
+					} catch (IndexOutOfBoundsException e) {
+						finalizaLeitura = true;
+						rejeita = true;
+					}
+				}
+					
+				if(tupla.getPilha().get(1).charAt(0) == 'E')
+					entrada.recuar();
 			}
 			
 		}
@@ -61,6 +79,11 @@ public class AutomatoFinitoDeterministico extends Automato {
 		estadoCorrente = proximoEstado;
 		entrada.avancar();
 
+	}
+	
+	@Override
+	public boolean extrapolou() {
+		return rejeita;
 	}
 	
 	@Override

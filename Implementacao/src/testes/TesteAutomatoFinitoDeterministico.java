@@ -36,7 +36,7 @@ public class TesteAutomatoFinitoDeterministico {
 		estadosFinais.add("q2");
 		estadoInicial = "q0";
 		
-		automatoFD = new AutomatoFinitoDeterministico(transicoes, estadosFinais, estadoInicial);
+		automatoFD = new AutomatoFinitoDeterministico(transicoes, estadosFinais, estadoInicial, true);
 	}
 
 	@Test
