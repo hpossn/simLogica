@@ -11,10 +11,13 @@ import servicos.Key;
 
 public class AutomatoPilhaDeterministico extends Automato{
 	
-	public AutomatoPilhaDeterministico(Map<Key, TuplaString> transicoes, List<String> estadosFinais, String estadoInicial, boolean ativarTrace) {
-		super(transicoes, estadosFinais, estadoInicial, ativarTrace);
+
+	
+	public AutomatoPilhaDeterministico(Map<Key, TuplaString> transicoes, List<String> estadosFinais, String estadoInicial, boolean ativarTrace, List<String> alfabeto) {
+		super(transicoes, estadosFinais, estadoInicial, ativarTrace, alfabeto);
 		
 		adicionarTransicoes(transicoes);
+		
 	}
 
 	protected Pilha pilha;
@@ -33,7 +36,7 @@ public class AutomatoPilhaDeterministico extends Automato{
 
 	@Override
 	protected void instanciarEntrada() {
-		entrada = new FitaLimitada();
+		entrada = new FitaLimitada(alfabeto);
 	}
 
 	@Override

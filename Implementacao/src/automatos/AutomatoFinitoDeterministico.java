@@ -9,10 +9,11 @@ import servicos.Key;
 import servicos.TuplaString;
 
 public class AutomatoFinitoDeterministico extends Automato {
+	
 
 	public AutomatoFinitoDeterministico(Map<Key, TuplaString> transicoes, List<String> estadosFinais,
-			String estadoInicial, boolean ativarTrace) {
-		super(transicoes, estadosFinais, estadoInicial, ativarTrace);
+			String estadoInicial, boolean ativarTrace, List<String> alfabeto) {
+		super(transicoes, estadosFinais, estadoInicial, ativarTrace, alfabeto);
 		
 		adicionarTransicoes(transicoes);
 		
@@ -23,7 +24,7 @@ public class AutomatoFinitoDeterministico extends Automato {
 
 	@Override
 	protected void instanciarEntrada() {
-		entrada = new FitaLimitada();
+		entrada = new FitaLimitada(alfabeto);
 	}
 
 	@Override

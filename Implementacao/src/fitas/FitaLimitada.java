@@ -1,13 +1,14 @@
 package fitas;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class FitaLimitada extends Fita {
 	
 	// Interface de instancializacao
 	
-	public FitaLimitada() {
-		super();
+	public FitaLimitada(List<String> alfabeto) {
+		super(alfabeto);
 	}
 	
 	@Override
@@ -17,19 +18,31 @@ public class FitaLimitada extends Fita {
 	
 	@Override
 	public void iniciar(String cadeia) {
-		celulas = new ArrayList<Character>();
-		celulas.add('<');
+		celulas = new ArrayList<String>();
+		celulas.add("<");
 		
-		for(char c : cadeia.toCharArray())
-			celulas.add(c);
+		int index = 0;
+
+		while(index < cadeia.length()) {
+			boolean procura = true;
+			for(int deslocamento = index; procura; deslocamento++) {
+				String subString = cadeia.substring(index, deslocamento + 1);
+
+				if(alfabeto.contains(subString)) {
+					celulas.add(subString);
+					index = deslocamento + 1;
+					procura = false;
+				}	
+			}
+		}
 		
-		celulas.add('>');
+		celulas.add(">");
 		
 		cursor = 1;
 	}
 	
 	@Override
-	public char ler() {
+	public String ler() {
 		return celulas.get(cursor);
 	}
 	
@@ -49,29 +62,29 @@ public class FitaLimitada extends Fita {
 		
 	@Override
 	protected boolean atingiuBOF() {
-		return celulas.get(cursor) == '<';
+		return celulas.get(cursor).equals("<");
 	}
 	
 	@Override
 	protected boolean atingiuEOF() {
-		return celulas.get(cursor) == '>';
+		return celulas.get(cursor).equals(">");
 	}
 	
 	@Override
 	public String configuracao() {
-		String prefixo = "";
-		String sufixo = "";
+		StringBuilder prefixo = new StringBuilder();
+		StringBuilder sufixo = new StringBuilder();
 		
 		int n = celulas.size();
 		
 		for(int i = 0; i < n; i++) {
 			if(i < cursor)
-				prefixo += celulas.get(i);
+				prefixo.append(celulas.get(i));
 			if(i > cursor)
-				sufixo += celulas.get(i);
+				sufixo.append(celulas.get(i));
 		}
 		
-		return String.format("(%d, %s[%c]%s", cursor, prefixo, celulas.get(cursor), sufixo);
+		return String.format("(%d, %s[%s]%s", cursor, prefixo, celulas.get(cursor), sufixo);
 	}
 	
 	@Override
@@ -85,6 +98,6 @@ public class FitaLimitada extends Fita {
 	}
 
 	@Override
-	public void escrever(char c) {}
+	public void escrever(String c) {}
 
 }

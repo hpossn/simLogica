@@ -1,6 +1,7 @@
 package testes;
 
-import static org.junit.Assert.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,24 +14,22 @@ public class TesteFitaLimitada {
 	
 	@Before
 	public void testeInicar() {
-		fitaLimitada = new FitaLimitada();
-		fitaLimitada.iniciar("abc");
-	}
-	
-	@Test
-	public void testeLer() {
-		assertEquals('a', fitaLimitada.ler());		
-	}
-	
-	@Test
-	public void testeConfiguracao() {
-		assertEquals("(1, <[a]bc>)", fitaLimitada.configuracao());
+		List<String> alfabeto = new ArrayList<String>();
+		alfabeto.add("numa");
+		alfabeto.add("*");
+		alfabeto.add("(");
+		alfabeto.add(")");
+		alfabeto.add("+");
+		alfabeto.add("a");
+		
+		
+		fitaLimitada = new FitaLimitada(alfabeto);
+		fitaLimitada.iniciar("numa*(numa+a)");
 	}
 	
 
 	@Test
 	public void testeGenerico() {
-		assertEquals("(1, <[a]bc>)", fitaLimitada.configuracao());
 		
 		fitaLimitada.recuar();
 		System.out.println(fitaLimitada.configuracao());

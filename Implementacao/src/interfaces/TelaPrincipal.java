@@ -26,9 +26,9 @@ public class TelaPrincipal {
 	public static void main(String args[]) {
 		boasVindas();
 		
-		/*while(continuar) {
+		while(continuar) {
 			fazerSimulacao();
-		}*/
+		}
 		
 		fazerSimulacao();
 	}
@@ -48,14 +48,11 @@ public class TelaPrincipal {
 		
 		List<String> configuracaoEntrada = new ArrayList<String>();
 		
-		/*System.out.print("\nEntre com uma opcao de dispositivo: ");
+		System.out.print("\nEntre com uma opcao de dispositivo: ");
 		int opcaoAutomato = input.nextInt();
 		
 		System.out.print("Entre com o nome do arquivo de entrada: ");
-		String fileName = input.next();*/
-		
-		int opcaoAutomato = 3;
-		String fileName = "automatoMT.txt";
+		String fileName = input.next();
 		
 		BufferedReader bufferedReader;		
 		
@@ -79,14 +76,15 @@ public class TelaPrincipal {
 			return;
 		}
 		
-		/*System.out.print("Ativar trace (0: OFF, 1: ON): ");
+		System.out.print("Ativar trace (0: OFF, 1: ON): ");
 		int ativarTraceInt = input.nextInt();
+		
+		input.nextLine();
+		
 		boolean ativarTrace = false;
 		
 		if(ativarTraceInt == 1)
-			ativarTrace = true;*/
-		
-		boolean ativarTrace = true;
+			ativarTrace = true;
 		
 		switch(opcaoAutomato) {
 		case 1:
@@ -110,10 +108,11 @@ public class TelaPrincipal {
 		
 		String estadoInicial = configuracaoEntrada.get(2);
 		List<String> estadosFinais = Arrays.asList(configuracaoEntrada.get(3).split(","));
+		List<String> alfabeto = Arrays.asList(configuracaoEntrada.get(1).split(","));
 		
 		if(ativarTrace) {
 			System.out.println("\nEstados pertecentes ao automato: " + configuracaoEntrada.get(0));
-			System.out.println("Alfabeto utilizado: " + configuracaoEntrada.get(1));
+			System.out.println("Alfabeto utilizado: " + alfabeto.toString());
 			System.out.println("Estado inicial: " + estadoInicial);
 			System.out.println("Estados finais: " + estadosFinais.toString());
 		}
@@ -138,7 +137,7 @@ public class TelaPrincipal {
 			transicoes.put(new Key(transicao.get(0), transicao.get(1), ""), new TuplaString(transicao.get(2), temp));
 		}
 		
-		AutomatoMTFI automatoMT = new AutomatoMTFI(transicoes, estadosFinais, estadoInicial, ativarTrace);
+		AutomatoMTFI automatoMT = new AutomatoMTFI(transicoes, estadosFinais, estadoInicial, ativarTrace, alfabeto);
 		
 		System.out.println("\nDispositivo carregado com sucesso.");
 		System.out.print("Entre a cadeia a ser analisada: ");
@@ -172,9 +171,11 @@ public class TelaPrincipal {
 		String estadoInicial = configuracaoEntrada.get(2);
 		List<String> estadosFinais = Arrays.asList(configuracaoEntrada.get(3).split(","));
 		
+		List<String> alfabeto = Arrays.asList(configuracaoEntrada.get(1).split(","));
+		
 		if(ativarTrace) {
 			System.out.println("\nEstados pertecentes ao automato: " + configuracaoEntrada.get(0));
-			System.out.println("Alfabeto utilizado: " + configuracaoEntrada.get(1));
+			System.out.println("Alfabeto utilizado: " + alfabeto.toString());
 			System.out.println("Estado inicial: " + estadoInicial);
 			System.out.println("Estados finais: " + estadosFinais.toString());
 		}
@@ -208,7 +209,7 @@ public class TelaPrincipal {
 			transicoes.put(new Key(transicao.get(0), transicao.get(1), transicao.get(2)), new TuplaString(transicao.get(3), adicionarPilha));
 		}
 		
-		AutomatoPilhaDeterministico automatoPD = new AutomatoPilhaDeterministico(transicoes, estadosFinais, estadoInicial, ativarTrace);
+		AutomatoPilhaDeterministico automatoPD = new AutomatoPilhaDeterministico(transicoes, estadosFinais, estadoInicial, ativarTrace, alfabeto);
 		
 		System.out.println("\nDispositivo carregado com sucesso.");
 		System.out.print("Entre a cadeia a ser analisada: ");
@@ -243,9 +244,11 @@ public class TelaPrincipal {
 		String estadoInicial = configuracaoEntrada.get(2);
 		List<String> estadosFinais = Arrays.asList(configuracaoEntrada.get(3).split(","));
 		
+		List<String> alfabeto = Arrays.asList(configuracaoEntrada.get(1).split(","));
+		
 		if(ativarTrace) {
 			System.out.println("\nEstados pertecentes ao automato: " + configuracaoEntrada.get(0));
-			System.out.println("Alfabeto utilizado: " + configuracaoEntrada.get(1));
+			System.out.println("Alfabeto utilizado: " + alfabeto.toString());
 			System.out.println("Estado inicial: " + estadoInicial);
 			System.out.println("Estados finais: " + estadosFinais.toString());
 		}
@@ -263,7 +266,7 @@ public class TelaPrincipal {
 			transicoes.put(new Key(transicao.get(0), transicao.get(1), ""), new TuplaString(transicao.get(2), new ArrayList<String>()));
 		}
 		
-		AutomatoFinitoDeterministico automatoFD = new AutomatoFinitoDeterministico(transicoes, estadosFinais, estadoInicial, ativarTrace);
+		AutomatoFinitoDeterministico automatoFD = new AutomatoFinitoDeterministico(transicoes, estadosFinais, estadoInicial, ativarTrace, alfabeto);
 		
 		System.out.println("\nDispositivo carregado com sucesso.");
 		System.out.print("Entre a cadeia a ser analisada: ");

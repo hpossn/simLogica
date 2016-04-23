@@ -16,13 +16,13 @@ public abstract class Reconhecedor {
 	
 	// Interface de instanciacao
 	
-	public Reconhecedor(String estadoInicial, List<String> estadosFinais, Map<Key, TuplaString> transicoes) {
+	public Reconhecedor(String estadoInicial, List<String> estadosFinais, Map<Key, TuplaString> transicoes, List<String> alfabeto) {
 		instanciarEstruturasEspecificas();
-		instanciarAutomato(estadoInicial, estadosFinais, transicoes);
+		instanciarAutomato(estadoInicial, estadosFinais, transicoes, alfabeto);
 	}
 
 	protected abstract void instanciarEstruturasEspecificas();
-	protected abstract void instanciarAutomato(String estadoInicial, List<String> estadosFinais, Map<Key, TuplaString> transicoes);
+	protected abstract void instanciarAutomato(String estadoInicial, List<String> estadosFinais, Map<Key, TuplaString> transicoes, List<String> alfabeto);
 
 	// Interface caracteristica
 	

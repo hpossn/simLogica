@@ -10,16 +10,16 @@ import servicos.TuplaString;
 
 public class ReconhecedorFinitoDeterministico extends Reconhecedor {
 
-	public ReconhecedorFinitoDeterministico(String estadoInicial, List<String> estadosFinais, Map<Key, TuplaString> transicoes) {
-		super(estadoInicial, estadosFinais, transicoes);
+	public ReconhecedorFinitoDeterministico(String estadoInicial, List<String> estadosFinais, Map<Key, TuplaString> transicoes, List<String> alfabeto) {
+		super(estadoInicial, estadosFinais, transicoes, alfabeto);
 	}
 
 	@Override
 	protected void instanciarEstruturasEspecificas() {}
 
 	@Override
-	protected void instanciarAutomato(String estadoInicial, List<String> estadosFinais, Map<Key, TuplaString> transicoes) {
-		automato = new AutomatoFinitoDeterministico(transicoes, estadosFinais, estadoInicial, true);
+	protected void instanciarAutomato(String estadoInicial, List<String> estadosFinais, Map<Key, TuplaString> transicoes, List<String> alfabeto) {
+		automato = new AutomatoFinitoDeterministico(transicoes, estadosFinais, estadoInicial, true, alfabeto);
 	}
 
 	@Override

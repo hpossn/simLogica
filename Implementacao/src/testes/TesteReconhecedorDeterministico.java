@@ -43,7 +43,12 @@ public class TesteReconhecedorDeterministico {
 		estadosFinais.add("q2");
 		estadoInicial = "q0";
 		
-		reconhecedorFD = new ReconhecedorFinitoDeterministico(estadoInicial, estadosFinais, transicoes);
+		List<String> alfabeto = new ArrayList<String>();
+		alfabeto.add("0");
+		alfabeto.add("1");
+		alfabeto.add("2");
+		
+		reconhecedorFD = new ReconhecedorFinitoDeterministico(estadoInicial, estadosFinais, transicoes, alfabeto);
 		
 	}
 

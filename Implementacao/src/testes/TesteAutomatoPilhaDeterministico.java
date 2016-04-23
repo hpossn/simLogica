@@ -56,7 +56,12 @@ public class TesteAutomatoPilhaDeterministico {
 		estadosFinais.add("q1");
 		estadoInicial = "q0";
 		
-		automatoPD = new AutomatoPilhaDeterministico(transicoes, estadosFinais, estadoInicial, true);
+		List<String> alfabeto = new ArrayList<String>();
+		alfabeto.add("a");
+		alfabeto.add("b");
+		alfabeto.add("c");
+		
+		automatoPD = new AutomatoPilhaDeterministico(transicoes, estadosFinais, estadoInicial, true, alfabeto);
 	}
 
 	@Test

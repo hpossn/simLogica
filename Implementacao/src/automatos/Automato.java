@@ -1,5 +1,6 @@
 package automatos;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,9 +16,12 @@ public abstract class Automato {
 	protected String estadoCorrente;
 	protected Fita entrada;
 	
+	protected List<String> alfabeto;
+	
 	protected boolean ativarTrace;
 	
-	public Automato(Map<Key, TuplaString> transicoes, List<String> estadosFinais, String estadoInicial, boolean ativarTrace) {
+	public Automato(Map<Key, TuplaString> transicoes, List<String> estadosFinais, String estadoInicial, boolean ativarTrace, List<String> alfabeto) {
+		this.alfabeto = new ArrayList<String>(alfabeto);
 		instanciarEstruturaEspecifica();
 		instanciarEntrada();
 		instanciarTransicoes();
@@ -67,7 +71,7 @@ public abstract class Automato {
 	}
 	
 	public boolean estaEmFinalDeCadeia() {
-		return entrada.ler() == '>';
+		return entrada.ler().equals(">");
 	}
 	
 	// Interface de movimento

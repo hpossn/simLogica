@@ -36,7 +36,11 @@ public class TesteAutomatoFinitoDeterministico {
 		estadosFinais.add("q2");
 		estadoInicial = "q0";
 		
-		automatoFD = new AutomatoFinitoDeterministico(transicoes, estadosFinais, estadoInicial, true);
+		List<String> alfabeto = new ArrayList<String>();
+		alfabeto.add("0");
+		alfabeto.add("1");
+		
+		automatoFD = new AutomatoFinitoDeterministico(transicoes, estadosFinais, estadoInicial, true, alfabeto);
 	}
 
 	@Test

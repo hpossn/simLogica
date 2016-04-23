@@ -11,10 +11,11 @@ import servicos.TuplaString;
 public class AutomatoMTFI extends Automato {
 	
 	private boolean rejeita = false;
+	
 
 	public AutomatoMTFI(Map<Key, TuplaString> transicoes, List<String> estadosFinais,
-			String estadoInicial, boolean ativarTrace) {
-		super(transicoes, estadosFinais, estadoInicial, ativarTrace);
+			String estadoInicial, boolean ativarTrace, List<String> alfabeto) {
+		super(transicoes, estadosFinais, estadoInicial, ativarTrace, alfabeto);
 		
 		adicionarTransicoes(transicoes);
 		
@@ -25,7 +26,7 @@ public class AutomatoMTFI extends Automato {
 
 	@Override
 	protected void instanciarEntrada() {
-		entrada = new FitaIlimitada();
+		entrada = new FitaIlimitada(alfabeto);
 	}
 
 	@Override
@@ -51,7 +52,7 @@ public class AutomatoMTFI extends Automato {
 				rejeita = true;
 			} else {
 				estadoCorrente = tupla.getEstado();
-				entrada.escrever(tupla.getPilha().get(0).charAt(0));
+				entrada.escrever(tupla.getPilha().get(0));
 				
 				if(tupla.getPilha().get(1).charAt(0) == 'D') {
 					try {

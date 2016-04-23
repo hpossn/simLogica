@@ -70,7 +70,12 @@ public class TesteAutomatoMTFI {
 		estadosFinais.add("q5");
 		estadoInicial = "q1";
 		
-		automatoMTFI = new AutomatoMTFI(transicoes, estadosFinais, estadoInicial, true);
+		List<String> alfabeto = new ArrayList<String>();
+		alfabeto.add("a");
+		alfabeto.add("b");
+		alfabeto.add("c");
+		
+		automatoMTFI = new AutomatoMTFI(transicoes, estadosFinais, estadoInicial, true, alfabeto);
 	}
 
 	@Test

@@ -1,17 +1,22 @@
 package fitas;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Fita {
 	
 	// Estrutura de colaboradores
-	protected List<Character> celulas;
+	protected List<String> celulas;
 	protected int cursor;
+	
+	protected List<String> alfabeto;
 	
 	// Interface de instancializacao
 	
-	public Fita() {
+	public Fita(List<String> alfabeto) {
+		this.alfabeto = new ArrayList<String>(alfabeto);
 		iniciarCelulas();
+		
 	}
 	
 	protected abstract void iniciarCelulas();
@@ -19,7 +24,7 @@ public abstract class Fita {
 	// Interface caracteristica
 	
 	public abstract void iniciar(String cadeia);
-	public abstract char ler();
+	public abstract String ler();
 	public abstract void avancar();
 	public abstract void recuar();
 	
@@ -36,6 +41,6 @@ public abstract class Fita {
 		throw new UnsupportedOperationException();
 	}
 	
-	public abstract void escrever(char valor);
+	public abstract void escrever(String valor);
 	
 }
